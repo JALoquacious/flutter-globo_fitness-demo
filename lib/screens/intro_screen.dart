@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../shared/menu_drawer.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);
@@ -7,6 +8,7 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Globo Fitness')),
+      drawer: const MenuDrawer(),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -15,14 +17,14 @@ class IntroScreen extends StatelessWidget {
           ),
         ),
         child: Center(
-            child: Container(
-          padding: const EdgeInsets.all(24),
-          decoration: const BoxDecoration(
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
             color: Colors.white70,
           ),
           child: const Text(
-            'Commit to be fit, dare to be great \nwith Globo Fitness!',
+            'Commit to be fit, dare to be great with Globo Fitness!',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 22,

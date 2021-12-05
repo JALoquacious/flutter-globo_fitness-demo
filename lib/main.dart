@@ -10,8 +10,9 @@ class GlobeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: IntroScreen()
+    return MaterialApp(
+      home: const IntroScreen(),
+      theme: ThemeData(primarySwatch: Colors.blueGrey),
     );
   }
 }
