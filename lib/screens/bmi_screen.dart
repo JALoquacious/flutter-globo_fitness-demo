@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:globo_fitness/shared/menu_drawer.dart';
+import '../shared/menu_bottom.dart';
+import '../shared/menu_drawer.dart';
 
 class BmiScreen extends StatelessWidget {
   const BmiScreen({ Key? key }) : super(key: key);
@@ -9,6 +10,7 @@ class BmiScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('BMI Calculator')),
       drawer: const MenuDrawer(),
+      bottomNavigationBar: const MenuBottom(),
       body: const Center(child: FlutterLogo())
     );
   }
