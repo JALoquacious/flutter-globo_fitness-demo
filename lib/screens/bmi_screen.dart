@@ -2,8 +2,27 @@ import 'package:flutter/material.dart';
 import '../shared/menu_bottom.dart';
 import '../shared/menu_drawer.dart';
 
-class BmiScreen extends StatelessWidget {
-  const BmiScreen({ Key? key }) : super(key: key);
+class BmiScreen extends StatefulWidget {
+  const BmiScreen({Key? key}) : super(key: key);
+
+  @override
+  State<BmiScreen> createState() => _BmiScreenState();
+}
+
+class _BmiScreenState extends State<BmiScreen> {
+  final double fontSize = 18;
+  late List<bool> isSelected;
+  String result = '';
+  bool isMetric = true;
+  bool isImperial = false;
+  double? height;
+  double? weight;
+
+  @override
+  void initState() {
+    isSelected = [isMetric, isImperial];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +30,35 @@ class BmiScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('BMI Calculator')),
       drawer: const MenuDrawer(),
       bottomNavigationBar: const MenuBottom(),
-      body: const Center(child: FlutterLogo())
+      body: Column(
+        children: [
+          ToggleButtons(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text('Metric', style: TextStyle(fontSize: fontSize))
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text('Imperial', style: TextStyle(fontSize: fontSize))
+              ),
+            ],
+            isSelected: [isMetric, isImperial],
+            onPressed: (value) {
+              if (value == 0) {
+                isMetric = true;
+                isImperial = false;
+              } else {
+                isMetric = false;
+                isImperial = true;
+              }
+              setState(() {
+                isSelected = [isMetric, isImperial];
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 }
