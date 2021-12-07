@@ -64,7 +64,7 @@ class _BmiScreenState extends State<BmiScreen> {
             decoration: InputDecoration(hintText: weightMessage)
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: findBMI,
             child: Text('Calculate BMI', style: TextStyle(fontSize: fontSize))
           ),
           Text(result, style: TextStyle(fontSize: fontSize))
@@ -83,6 +83,21 @@ class _BmiScreenState extends State<BmiScreen> {
     }
     setState(() {
       isSelected = isSelected;
+    });
+  }
+
+  void findBMI() {
+    double bmi = 0;
+    double height = double.tryParse(txtHeight.text) ?? 0;
+    double weight = double.tryParse(txtWeight.text) ?? 0;
+
+    if (isMetric) {
+      bmi = weight / (height * height);
+    } else {
+      bmi = weight * 703 / (height * height);
+    }
+    setState(() {
+      result = 'Your BMI is ' + bmi.toStringAsFixed(2);
     });
   }
 }
