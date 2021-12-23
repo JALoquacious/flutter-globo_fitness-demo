@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import '../screens/intro_screen.dart';
 import '../screens/bmi_screen.dart';
+import '../screens/weather_screen.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: buildMenuItems(context)
-      )
-    );
+    return Drawer(child: ListView(children: buildMenuItems(context)));
   }
 
   List<Widget> buildMenuItems(BuildContext context) {
@@ -45,10 +42,12 @@ class MenuDrawer extends StatelessWidget {
             case 'BMI Calculator':
               screen = const BmiScreen();
               break;
+            case 'Weather':
+              screen = const WeatherScreen();
+              break;
           }
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => screen)
-          );
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => screen));
         },
       ));
     }
