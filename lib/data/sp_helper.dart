@@ -27,6 +27,10 @@ class SPHelper {
     return sessions;
   }
 
+  Future deleteSession(int id) async {
+    prefs.remove(id.toString());
+  }
+
   Future setCounter() async {
     int counter = prefs.getInt('counter') ?? 0;
     counter++;
