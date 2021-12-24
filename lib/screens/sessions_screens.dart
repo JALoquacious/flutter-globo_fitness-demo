@@ -13,10 +13,13 @@ class _SessionsScreenState extends State<SessionsScreen> {
   final TextEditingController txtDescription = TextEditingController();
   final TextEditingController txtDuration = TextEditingController();
   final SPHelper spHelper = SPHelper();
+  List<Session> sessions = [];
 
   @override
   void initState() {
-    spHelper.init();
+    spHelper.init().then((value) {
+      updateScreen();
+    });
     super.initState();
   }
 
@@ -24,7 +27,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Your Training Sessions')),
-      body: Container(),
+      body: ListView(children: getContent()),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
@@ -74,15 +77,36 @@ class _SessionsScreenState extends State<SessionsScreen> {
   Future saveSession() async {
     DateTime now = DateTime.now();
     String today = '${now.year}-${now.month}-${now.day}';
+    int id = spHelper.getCounter() + 1;
     Session newSession = Session(
-      1,
+      id,
       int.tryParse(txtDuration.text) ?? 0,
       today,
       txtDescription.text,
     );
-    spHelper.writeSession(newSession);
+
+    spHelper.writeSession(newSession).then((_) {
+      updateScreen();
+      spHelper.setCounter();
+    });
     txtDescription.text = '';
     txtDuration.text = '';
     Navigator.pop(context);
+  }
+
+  List<Widget> getContent() {
+    List<Widget> tiles = [];
+    sessions.forEach((Session session) {
+      tiles.add(ListTile(
+          title: Text(session.description),
+          subtitle:
+              Text('${session.date} - duration: ${session.duration} min')));
+    });
+    return tiles;
+  }
+
+  void updateScreen() {
+    sessions = spHelper.getSessions();
+    setState(() {});
   }
 }
