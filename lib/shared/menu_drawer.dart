@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/intro_screen.dart';
 import '../screens/bmi_screen.dart';
 import '../screens/weather_screen.dart';
+import '../screens/sessions_screens.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key? key}) : super(key: key);
@@ -44,6 +45,9 @@ class MenuDrawer extends StatelessWidget {
               break;
             case 'Weather':
               screen = const WeatherScreen();
+              break;
+            case 'Training':
+              screen = const SessionsScreen();
               break;
           }
           Navigator.of(context)
